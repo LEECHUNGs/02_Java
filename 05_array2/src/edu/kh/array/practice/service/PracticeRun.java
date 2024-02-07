@@ -11,6 +11,13 @@ public class PracticeRun {
 		//ser.practice4();
 		//ser.practice5();
 		//ser.practice6();
-		ser.practice7();
+		//ser.practice7();
+		ser.practice8();
+		//ser.practice9();
+		//ser.practice10();
+		//ser.practice11();
+		//ser.pracitce12();
+		//ser.practice13();
+		//ser.practice14();
 	}
 }
