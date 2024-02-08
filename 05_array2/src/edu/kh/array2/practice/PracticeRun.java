@@ -11,6 +11,9 @@ public class PracticeRun {
 		//test.practice4();
 		//test.practice5();
 		//test.practice6();
-		test.pracitce7();
+		//test.practice7();
+		//test.practice8();
+		//test.practice9();
+		test.practice10();
 	}
 }
