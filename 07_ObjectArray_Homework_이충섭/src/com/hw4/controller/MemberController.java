@@ -6,8 +6,8 @@ public class MemberController {
 	
 	public final int SIZE = 10;
 	
-	private int memberCount = 0;
 	private Member mem[] = new Member[SIZE];
+	private int memberCount = 0;
 	
 	{
 		mem[0] = new Member("user01", "pass01", "김유신", 20, 'M', "kim12@naver.com");
@@ -15,6 +15,8 @@ public class MemberController {
 		mem[2] = new Member("user03", "pass03", "유관순", 17, 'F', "yo5@hanmail.com");
 		mem[3] = new Member("user04", "pass04", "연개소문", 57, 'M', "yeon@gmail.com");
 		mem[4] = new Member("user05", "pass05", "신사임당", 45, 'F', "shin@naver.com");
+		
+		memberCount = 5;
 	}
 	
 	public int getMemberCount() {
@@ -29,12 +31,10 @@ public class MemberController {
 	
 	public Member checkId(String userId) {
 		
-		for(int i = 0; i<mem.length; i++) {
+		for(int i = 0; i<memberCount; i++) {
 			
-			if(mem[i] != null) {
-				if(userId.equals(mem[i].getUserId())) {
-					return mem[i];
-				}
+			if(userId.equals(mem[i].getUserId())) {
+				return mem[i];
 			}
 		}
 		
@@ -49,7 +49,7 @@ public class MemberController {
 	public Member searchMember(int menu, String search) {
 		
 		
-		for(int i = 0; i<mem.length; i++) {
+		for(int i = 0; i<memberCount; i++) {
 			switch(menu) {
 			case 1: 
 				if(search.equals(mem[i].getUserId()))

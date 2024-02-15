@@ -43,7 +43,9 @@ public class MemberMenu {
 	
 	public void insertMember() {
 		// 1. 
-		if(mc.getMemberCount() > mc.SIZE) {
+		if(mc.getMemberCount() >= mc.SIZE) {
+			
+			System.out.println("더 이상 회원을 늘릴 수 없습니다.");
 			return;
 		}
 		
@@ -200,6 +202,9 @@ public class MemberMenu {
 			System.out.println("5. 성별 내림차순 정렬(남여순)");
 			System.out.println("0. 이전 메뉴로");
 			
+			System.out.print("메뉴 선택 : ");
+			inputNum = sc.nextInt();
+			
 			switch(inputNum) {
 			case 1: 
 				sortMem = mc.sortIdAsc(); 
@@ -219,8 +224,10 @@ public class MemberMenu {
 			case 0: break;
 			}
 			
-			for(int i = 0; i<mc.getMemberCount(); i++) {
-				System.out.println(sortMem[i].information());
+			if(inputNum != 0) {
+				for(int i = 0; i<mc.getMemberCount(); i++) {
+					System.out.println(sortMem[i].information());
+				}
 			}
 			
 		} while (inputNum != 0);
