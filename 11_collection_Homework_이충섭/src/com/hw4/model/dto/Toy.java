@@ -1,19 +1,17 @@
 package com.hw4.model.dto;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class Toy {
 	
 	// 필드
 	private String name;
-	private int age;
+	private int age; // 사용가능 연령
 	private int price;
 	private String color;
-	private String year;
+	private String year; // 제조일(문자열로 표현 =20240222)
 	
 	private Map<Integer, String> resorce;
 	
@@ -29,8 +27,6 @@ public class Toy {
 		this.year = year;
 		this.resorce = resorce;
 	}
-	
-	
 
 	public String getName() {
 		return name;
@@ -96,6 +92,21 @@ public class Toy {
 		return str;
 	}
 	
-	
+	// materials 안 모든 재료를 문자열 형태로 만들어 반환하는 메서드
+//	public String getMaterialsAsString() {
+//		
+//		StringBuilder sb = new StringBuilder();
+//		
+//		for(String material : resorce) {
+//			
+//			sb.append(material).append(", ");
+//		}
+//		
+//		if(sb.length() > 0) {
+//			sb.setLength(sb.length() - 2);
+//		}
+//		
+//		return sb.toString(sb);
+//	}
 	
 }
