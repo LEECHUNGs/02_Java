@@ -2,44 +2,33 @@ import java.util.*;
 public class Main {
 	public static void main(String[] args) {
 		
-		String s = "abracadabra";
-		int answer = 0;
+		String skip = "zyxwv";
+		String s = "abcdef";
+		int index = 100;
+		
+		String answer = "";
+        StringBuffer sbS = new StringBuffer(s);
+        StringBuffer sbResult = new StringBuffer("");
         
-        List<StringBuffer> al = new ArrayList<StringBuffer>();
-        
-        StringBuffer a = null;
-        int count[] = {1, 0};
-        
-        int index = 0;
-        int index2 = 0;
-        while(index < s.length()) {
-            
-            al.add(new StringBuffer("" + s.charAt(index++)));
-            a = al.get(index2++);
-            
-            System.out.println(a);
-            
-            for(; index<s.length(); index++) {
+        int indexSub = 0;
+        for(int i = 0; i<sbS.length(); i++) {
+           
+        	System.out.print("스킵 문자 : ");
+            for(int j = 0; j<skip.length(); j++) {
                 
-                a.append(s.charAt(index));
-                
-                System.out.println("a : " + a);
-                
-                if(a.charAt(0) == s.charAt(index)) count[0]++;
-                else count[1]++;
-                
-                if(count[0] == count[1]) {
-                	index++;
-                    break;
+                if(sbS.charAt(i) < skip.charAt(j) && skip.charAt(j) <= sbS.charAt(i) + index) {
+                	System.out.print(skip.charAt(j));
+                    indexSub++;
                 }
             }
             
-            a = null;
-            count[0] = 1;
-            count[1] = 0;
-        }
+            System.out.println();
+            // u - w x y z a
+            sbResult.append((char)((sbS.charAt(i)-'a'+index+indexSub)%('z' + 1-'a') + 'a'));
+            indexSub = 0;
+        } 
         
-        answer = al.size();
+        answer = sbResult.toString();
         
         System.out.println(answer);
 	}
