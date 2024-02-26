@@ -20,4 +20,34 @@ public interface TodoListService {
 	 */
 	String dateFormat(LocalDateTime regDate);
 
+	/** 전달 받은 idex 번째 todo 반환
+	 * @param index
+	 * @return index번쨰 todo 상세 정보, 없으면 null 반환
+	 */
+	String todoDetailView(int index);
+
+	/** 할 일 추가 서비스
+	 * @param title
+	 * @param content
+	 * @return 추가된 inded 번호 or -1
+	 */
+	int todoAdd(String title, String content) throws Exception;
+
+	/** 할 일 완료 여부 변경
+	 * @param index
+	 * @return 해당 index 요소의 완료 여부가 변경되면 true
+	 * 		   index 요소가 없으면 false
+	 */
+	boolean todoComplete(int index) throws Exception;
+
+	/** 할 일 수정 서비스
+	 * @param index
+	 * @param title
+	 * @param string
+	 * @return 수정 성공시 true, 실패 false
+	 */
+	boolean todoUpdate(int index, String title, String content) throws Exception;
+
+	String todoDelete(int index) throws Exception;
+
 }
