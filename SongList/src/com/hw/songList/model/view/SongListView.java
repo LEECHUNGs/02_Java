@@ -46,11 +46,13 @@ public class SongListView {
 				}
 
 			} catch (IOException e) {
-				System.out.println("오류");
+				System.out.println("입/출력 오류");
 				
 			} catch (NumberFormatException e) {
 				System.out.println("숫자만 입력해 주세요;;");
 				input = -1;
+			} catch (Exception e) {
+				System.out.println("저장 에러;;");
 			}
 			
 			
@@ -106,7 +108,7 @@ public class SongListView {
 			default : System.out.println("유효하지 않은 입력입니다. 다시 입력해 주세요;;");
 			}
 			
-			System.out.println(sb.toString() + "입력해 주세요 >> ");
+			System.out.print(sb.toString() + "입력해 주세요 >>  ");
 			String str = br.readLine();
 			
 			List<Song> searchSongList = new ArrayList<Song>();
@@ -147,14 +149,52 @@ public class SongListView {
 		System.out.print("노래 제목을 입력해 주세요 : ");
 		String str = br.readLine();
 		
-		Song song = service.songLyrics(str);
+		String lyrics = service.songLyrics(str);
+		System.out.println(lyrics);
 	}
 	
-	public void songAdd() {
+	public void songAdd() throws Exception{
+		System.out.println("******* 4. 노래 추가하기 *******");
 		
+		System.out.print("노래 제목 입력 : ");
+		String title = br.readLine();
+		
+		System.out.print("가수 이름 입력 : ");
+		String artist = br.readLine();
+		
+		System.out.print("좋아요 개수 : ");
+		int like = Integer.parseInt(br.readLine());
+		
+		switch(service.songAdd(title, artist, like)) {
+		case 1 : System.out.println("정상적으로 노래가 저장되었습니다."); break;
+		case 0 : System.out.println("노래는 정상적으로 저장했지만 가사가 저장되지 않았습니다.\n"
+														+ "나중에 가사파일 (노래명.txt) 을 업로드 해주세요"); break;
+		case -1 : System.out.println("같은 곡이 저장되어 있습니다!!! 확인해 주세요;;;");
+		}
 	}
 	
-	public void songDelete() {
+	public void songDelete() throws Exception{
+		System.out.println("******* 5. 노래 삭제하기 *******");
 		
+		System.out.println("삭제할 노래의 제목을 입력하세요");
+		System.out.print(">> ");
+		String title = br.readLine();
+		
+		Song song = service.songDelete(title);
+		
+		if(song != null) {
+			System.out.println("------------------------------");
+			System.out.println("노래명 : " + song.getTitle());
+			System.out.println("가수 : " + song.getArtist());
+			System.out.println("좋아요 : " + song.getLike());
+			
+			System.out.println("위의 노래가 삭제되었습니다.");
+		}
+		else {
+			System.out.println("해당 노래가 존재하지 않습니다.");
+			
+		}
+		
+		System.out.println("------------------------------");
 	}
 }

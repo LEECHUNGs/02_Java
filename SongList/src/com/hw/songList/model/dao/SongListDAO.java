@@ -31,4 +31,23 @@ public interface SongListDAO {
 	 * @return 일치하는 Song 객체, 없다면 null
 	 */
 	Song songLyrics(String str);
+
+	/** 노래 정보를 입력받아 저장하는 메서드
+	 * @param like 
+	 * @param artist 
+	 * @param title 
+	 * @return 노래명이 같은 객체가 가수명도 같을 경우 -1, 그렇지 않을 때, 가사를 찾았는데 없을 경우 0, 가사가 있으면 1을 리턴
+	 */
+	int songAdd(String title, String artist, int like) throws Exception;
+	
+	/** songList 안에 Song 객체를 저장하는 메서드
+	 * @throws Exception
+	 */
+	void saveFile() throws Exception;
+
+	/** 입력받은 노래 제목과 일치하는 객체를 삭제
+	 * @param title
+	 * @return 삭제된 객체 리턴, 검색된게 없으면 null 리턴
+	 */
+	Song songDelete(String title) throws Exception;
 }

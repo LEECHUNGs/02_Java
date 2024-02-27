@@ -35,9 +35,24 @@ public class SongListServiceImpl implements SongListService{
 	}
 
 	@Override
-	public Song songLyrics(String str) {
+	public String songLyrics(String str) {
 		Song song = dao.songLyrics(str);
 		
-		return null;
+		if(song == null) return "해당 노래가 존재하지 않습니다.";
+		
+		if(song.getLyrics() != null) return song.getLyrics();
+		else return "가사가 등록되지 않았습니다. 가사를 등록해 주세요.";
+	}
+
+	@Override
+	public int songAdd(String title, String artist, int like) throws Exception{
+		
+		return dao.songAdd(title, artist, like);
+	}
+
+	@Override
+	public Song songDelete(String title) throws Exception{
+		
+		return dao.songDelete(title);
 	}
 }

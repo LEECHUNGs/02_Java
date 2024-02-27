@@ -47,11 +47,11 @@ public class SongListDAOImpl implements SongListDAO{
 			songList = new ArrayList<Song>();
 			
 			String a = lyricsInput("사랑은 늘 도망가");
-			songList.add(new Song("사랑은 늘 도망가", "임영웅", 20, a));
+			songList.add(new Song("사랑은 늘 도망가", "임영웅", 20, lyricsInput("사랑은 늘 도망가")));
 			songList.add(new Song("사랑은 은하수 다방에서", "10cm", 17, lyricsInput("사랑은 은하수 다방에서")));
 			songList.add(new Song("폰서트", "10cm", 18, lyricsInput("폰서트")));
 			songList.add(new Song("후라이의 꿈", "AKMU", 25, lyricsInput("후라이의 꿈")));
-			//-----			
+			
 			try {
 				oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH));
 				oos.writeObject(songList); 
@@ -90,8 +90,8 @@ public class SongListDAOImpl implements SongListDAO{
 
 	@Override
 	public List<Song> sortSongList() {
-		
 		return songList;
+		
 	}
 
 	@Override
@@ -105,6 +105,8 @@ public class SongListDAOImpl implements SongListDAO{
 			case 3 : searchStr = song.getLyrics(); break;
 			
 			}
+			
+			if(searchStr == null) continue;
 			
 			if(searchStr.indexOf(str) != -1) {
 				searchSongList.add(song);
@@ -127,21 +129,67 @@ public class SongListDAOImpl implements SongListDAO{
 				break;
 				
 			}
-			
-		}
-		
-		try {
-			System.out.println(lyricsInput("사랑은 은하수 다방에서"));
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			
 		}
 		
 		return searchSong;
 	}
 
+	@Override
+	public int songAdd(String title, String artist, int like) throws Exception{
+		
+		for(Song s : songList) {
+			if(title.equals(s.getTitle()) && artist.equals(s.getArtist())) {
+				return -1;
+				
+			}
+		}
+		
+		String lyrics = null;
+		if((lyrics = lyricsInput(title)) != null) {
+			Song song = new Song(title, artist, like, lyricsInput(title));			
+			songList.add(song);
+			
+			saveFile();
+			
+			return 1;
+		}
+		else {
+			Song song = new Song(title, artist, like, null);						
+			songList.add(song);
+			
+			saveFile();
+			
+			return 0;
+		}
+	}
+	
+	@Override
+	public void saveFile() throws Exception{
+		try {
+			oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH));
+			oos.writeObject(songList); 
+			
+		} finally {
+			
+			oos.close();
+		}
+		
+	}
 
+	@Override
+	public Song songDelete(String title) throws Exception{
+		for(Song s : songList) {
+			if(title.equals(s.getTitle())) {
+				songList.remove(s);
+				
+				saveFile();
+				
+				return s;
+			}
+		}
+		
+		return null;
+	}
 	
 	
 	

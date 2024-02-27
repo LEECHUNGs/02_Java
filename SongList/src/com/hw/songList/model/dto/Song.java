@@ -16,6 +16,7 @@ public class Song implements Serializable{
 		this.title = title;
 		this.artist = artist;
 		this.like = like;
+		this.lyrics = lyrics;
 	}
 
 	public String getTitle() {
