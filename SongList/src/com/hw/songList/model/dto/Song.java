@@ -1,19 +1,20 @@
 package com.hw.songList.model.dto;
 
-public class Song {
+import java.io.Serializable;
+
+public class Song implements Serializable{
 	
-	private String title;
-	private String artist;
-	private String album;
-	private int like;
+	private String title; // 노래 제목
+	private String artist; // 가수
+	private int like; // 좋아요 수
+	private String lyrics; // 노래 가사
 	
 	public Song() {}
 
-	public Song(String title, String artist, String album, int like) {
+	public Song(String title, String artist, int like, String lyrics) {
 		super();
 		this.title = title;
 		this.artist = artist;
-		this.album = album;
 		this.like = like;
 	}
 
@@ -29,16 +30,16 @@ public class Song {
 		return artist;
 	}
 
+	public String getLyrics() {
+		return lyrics;
+	}
+
+	public void setLyrics(String lyrics) {
+		this.lyrics = lyrics;
+	}
+
 	public void setArtist(String artist) {
 		this.artist = artist;
-	}
-
-	public String getAlbum() {
-		return album;
-	}
-
-	public void setAlbum(String album) {
-		this.album = album;
 	}
 
 	public int getLike() {
@@ -47,7 +48,5 @@ public class Song {
 
 	public void setLike(int like) {
 		this.like = like;
-	}
-	
-	
+	}	
 }

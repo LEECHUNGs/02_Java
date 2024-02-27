@@ -8,6 +8,6 @@ public class SongListRun {
 		
 		SongListView service = new SongListView();
 		
-		
+		service.startView();
 	}
 }
