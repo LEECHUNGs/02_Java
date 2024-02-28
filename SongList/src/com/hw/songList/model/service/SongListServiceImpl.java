@@ -51,8 +51,34 @@ public class SongListServiceImpl implements SongListService{
 	}
 
 	@Override
-	public Song songDelete(String title) throws Exception{
+	public Song songDelete(Song song) throws Exception{
 		
-		return dao.songDelete(title);
+		return dao.songDelete(song);
+	}
+
+	@Override
+	public Song songExist(String title, String artist) {
+		
+		
+		return dao.songExist(title, artist);
+	}
+
+	@Override
+	public Song songUpdate(int input, Song song, String updateDate) throws Exception{
+		
+		Song s = null;
+		switch(input) {
+		case 1 : s = dao.updateTitle(song, updateDate); break;
+		case 2 : s = dao.updateArtist(song, updateDate); break;
+		case 3 : s = dao.updateLike(song, Integer.parseInt(updateDate)); break;
+		}
+		
+		return s;
+	}
+	
+	@Override
+	public void songLyricsUpload() throws Exception{
+		dao.songLyricsUpload();
+		
 	}
 }

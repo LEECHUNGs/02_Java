@@ -13,18 +13,17 @@ import java.util.List;
 import com.hw.songList.model.dto.Song;
 
 public class SongListDAOImpl implements SongListDAO{
-	private final String FOLDER_PATH = "/io_test/song_list";
-	private final String FILE_PATH = "/io_test/song_list/SongList.dat";
+	private final String FOLDER_PATH = "../../songListData";
+	private final String FILE_PATH = "../../songListData/SongList.dat";
 	
 	// 입/출력 기반 스트림
 	private FileInputStream fis = null;
-	private FileOutputStream fos = null;
 	
 	// 입/출력 보조 스트림
 	private ObjectInputStream ois = null;
 	private ObjectOutputStream oos = null;
 	
-	private ArrayList<Song> songList;
+	private List<Song> songList;
 	
 	public SongListDAOImpl() throws FileNotFoundException, IOException, ClassNotFoundException{
 		File file = new File(FILE_PATH);
@@ -177,18 +176,67 @@ public class SongListDAOImpl implements SongListDAO{
 	}
 
 	@Override
-	public Song songDelete(String title) throws Exception{
+	public Song songDelete(Song song) throws Exception{
+		songList.remove(song);
+		
+		saveFile();
+		
+		return song;
+	}
+
+	@Override
+	public void songLyricsUpload() throws Exception{
 		for(Song s : songList) {
-			if(title.equals(s.getTitle())) {
-				songList.remove(s);
-				
-				saveFile();
+			
+			s.setLyrics(lyricsInput(s.getTitle()));
+		}
+		
+		saveFile();
+		
+		System.out.println("업로드 완료");
+	}
+
+	@Override
+	public Song songExist(String title, String artist) {
+		for(Song s : songList) {
+			if(title.equals(s.getTitle()) && artist.equals(s.getArtist())) {
 				
 				return s;
 			}
+			
 		}
 		
 		return null;
+	}
+
+	@Override
+	public Song updateTitle(Song song, String updateDate) throws Exception{
+		
+		song.setTitle(updateDate);
+		
+		saveFile();
+		
+		return song;
+	}
+
+	@Override
+	public Song  updateArtist(Song song, String updateDate) throws Exception{
+		
+		song.setArtist(updateDate);
+		
+		saveFile();
+		
+		return song;
+	}
+
+	@Override
+	public Song updateLike(Song song, int like) throws Exception{
+		
+		song.setLike(like);
+		
+		saveFile();
+		
+		return song;
 	}
 	
 	

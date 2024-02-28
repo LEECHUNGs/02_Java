@@ -45,9 +45,46 @@ public interface SongListDAO {
 	 */
 	void saveFile() throws Exception;
 
-	/** 입력받은 노래 제목과 일치하는 객체를 삭제
+	/** 입력받은 객체를 삭제
 	 * @param title
-	 * @return 삭제된 객체 리턴, 검색된게 없으면 null 리턴
+	 * @return 삭제된 객체 리턴
 	 */
-	Song songDelete(String title) throws Exception;
+	Song songDelete(Song song) throws Exception;
+
+	/** 가사 목록을 업로드하는 메서드
+	 * 
+	 */
+	void songLyricsUpload() throws Exception;
+
+	/** 객체의 제목과 가수를 검색해, 일치하는 객체를 리턴하는 메서드
+	 * @param title
+	 * @param artist
+	 * @return 일치하는 Song 객체 리턴
+	 */
+	Song songExist(String title, String artist);
+
+	/** 노래 제목을 수정하는 메서드
+	 * @param song
+	 * @param updateDate
+	 * @return 수정된 Song 객체 리턴
+	 * @throws Exception
+	 */
+	Song updateTitle(Song song, String updateDate) throws Exception;
+	
+	/** 가수 이름을 수정하는 메서드
+	 * @param song
+	 * @param updateDate
+	 * @return 수정된 Song 객체 리턴
+	 * @throws Exception
+	 */
+	Song updateArtist(Song song, String updateDate) throws Exception;
+
+	/** 좋아요 수를 수정하는 메서드
+	 * @param song
+	 * @param like 
+	 * @return 수정된 Song 객체 리턴
+	 * @throws Exception
+	 */
+	Song updateLike(Song song, int like) throws Exception;
+
 }
